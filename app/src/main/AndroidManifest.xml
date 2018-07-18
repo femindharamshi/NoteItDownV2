@@ -23,8 +23,17 @@
         <activity
             android:name=".HomeActivity"
             android:label="Note It Down"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-        <activity android:name=".EditorActivity"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+
+        </activity>
+        <activity android:name=".EditorActivity">
+
+
+        </activity>
+
+
+
     </application>
 
 </manifest>
