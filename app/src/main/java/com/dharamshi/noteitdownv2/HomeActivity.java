@@ -139,7 +139,6 @@ public class HomeActivity extends AppCompatActivity {
                             notesList.add(c.getString(messageIndex));
                         else
                             notesList.add("");
-
                     }
                 }
 
