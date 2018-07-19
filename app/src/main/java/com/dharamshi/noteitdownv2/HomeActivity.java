@@ -22,15 +22,28 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
+
+    // TODO : Implement Admob : ca-app-pub-5513150209080770/7091709500
+    // Test Ad : ca-app-pub-3940256099942544/6300978111
 
     ConstraintLayout mainLayout;
 
     public static ArrayList<String> titleList = new ArrayList<>();
     public static ArrayList<String> notesList = new ArrayList<>();
     public static ArrayList<Integer> idList = new ArrayList<>();
+
+    //TODO: Inisitalize AdMob Variables.
+//    private AdView mAdView;
+//    private InterstitialAd mInterstitialAd;
 
     public static ArrayAdapter sArrayAdapter;
 
@@ -45,6 +58,33 @@ public class HomeActivity extends AppCompatActivity {
 
         searchCancel = findViewById(R.id.searchCancel);
         searchET = findViewById(R.id.searchET);
+
+
+        //TODO: Initialize and implement admob.
+        // Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713
+//        MobileAds.initialize(this, "ca-app-pub-5513150209080770~1883205736");
+//
+//        mAdView = findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
+//
+//        mAdView.setAdListener(new AdListener(){
+//            @Override
+//            public void onAdLoaded() {
+//                mAdView.setVisibility(View.VISIBLE);
+//            }
+//
+//            @Override
+//            public void onAdFailedToLoad(int error) {
+//                mAdView.setVisibility(View.GONE);
+//            }
+//        });
+//
+//        mInterstitialAd = new InterstitialAd(this);
+//        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+//        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+
 
         Toast.makeText(this, "Developed by Femin Dharamshi", Toast.LENGTH_SHORT).show();
 
@@ -156,6 +196,12 @@ public class HomeActivity extends AppCompatActivity {
         notesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+//                if (mInterstitialAd.isLoaded()) {
+//                    mInterstitialAd.show();
+//                } else {
+//                    Log.d("TAG", "The interstitial wasn't loaded yet.");
+//                }
 
                 Intent intent = new Intent(getApplicationContext(), EditorActivity.class);
                 intent.putExtra("noteID", i);
