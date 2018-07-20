@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
     ListView notesListView;
     ImageButton searchCancel;
     EditText searchET;
+    FloatingActionButton addNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
 
         searchCancel = findViewById(R.id.searchCancel);
         searchET = findViewById(R.id.searchET);
-
+        addNote = findViewById(R.id.addNoteFAB);
 
         //TODO: Initialize and implement admob.
         // Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713
@@ -125,6 +128,15 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         }
+
+        addNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), EditorActivity.class);
+                intent.putExtra("noteID", -1);
+                startActivity(intent);
+            }
+        });
 
         sArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, titleList);
 
@@ -236,6 +248,10 @@ public class HomeActivity extends AppCompatActivity {
 
                                 sArrayAdapter.notifyDataSetChanged();
 
+
+                                showSnack(findViewById(R.id.constraintLayout), "Note Deleted!");
+
+
                             }
                         })
                         .show();
@@ -247,8 +263,6 @@ public class HomeActivity extends AppCompatActivity {
 
     public void refreshList(View view){
 
-        Vibrator vb = (Vibrator)  getSystemService(Context.VIBRATOR_SERVICE);
-        vb.vibrate(50);
 
         idList.clear();
         notesList.clear();
@@ -297,18 +311,16 @@ public class HomeActivity extends AppCompatActivity {
 
         sArrayAdapter.notifyDataSetChanged();
 
-    }
 
-    public void addNewNote(View view){
 
-        Vibrator vb = (Vibrator)  getSystemService(Context.VIBRATOR_SERVICE);
-        vb.vibrate(50);
-
-        Intent intent = new Intent(getApplicationContext(), EditorActivity.class);
-        intent.putExtra("noteID", -1);
-        startActivity(intent);
 
     }
+
+//    public void addNewNote(View view){
+//
+//
+//
+//    }
 
     @Override
     public void onResume(){
@@ -316,6 +328,13 @@ public class HomeActivity extends AppCompatActivity {
 
         refreshList(searchET);
 
+    }
+
+    public void showSnack(View v, String msg){
+        Snackbar snackbar = Snackbar
+                .make(v, msg, Snackbar.LENGTH_SHORT);
+
+        snackbar.show();
     }
 
 }
